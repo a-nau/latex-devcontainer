@@ -1,0 +1,22 @@
+{
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "james-yu.latex-workshop",
+                "ban.spellright",
+                "nickfode.latex-formatter",
+                "mathematic.vscode-latex",
+                "ms-azuretools.vscode-docker",
+                "meezilla.json"
+            ]
+        }
+    },
+    "mounts": [
+        "source=${env:USERPROFILE}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached" // Windows only to use Git credentials
+    ],
+    "postCreateCommand": "mkdir -p .vscode;cp .devcontainer/settings.json .vscode/;sh .devcontainer/ci/copy_ci.sh" // copy settings and CI
+    // "postCreateCommand": "mkdir -p .vscode;cp .devcontainer/settings.json .vscode/" // copy settings only
+}
