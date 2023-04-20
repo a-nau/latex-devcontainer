@@ -3,7 +3,7 @@ on: [push]
 
 jobs:
   build_latex:
-    runs-on: texlive/texlive:latest-full@sha256:7883407672e3
+    runs-on: texlive/texlive:latest-full
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v3
