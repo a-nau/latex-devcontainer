@@ -25,8 +25,13 @@ Step by Step:
 - Press `F1` (or `CTRL + SHIFT + P`) and select `Dev Containers: Rebuild and Reopen Container`
 - (optional) rename main Texfile to `root.tex` or adjust CI configs if you want to use the CIs
 - Commit the files copied during the Devcontainer setup (`settings.json`, `.gitlab-ci.yml`, `latex_build.yml`)
+- If you do not see the following latex command menu, try reloading the window
+<p align="center">
+    <img src="./misc/latex_command_menu.png" height="250"/>
+</p>
 
 ## Credits
 
 - Uses [arxiv-latex-cleaner](https://github.com/google-research/arxiv-latex-cleaner): [Apache 2.0 License](https://github.com/google-research/arxiv-latex-cleaner/blob/main/LICENSE)
 - Uses [pdf-link-checker](https://github.com/a-nau/pdf-link-checker): [MIT License](https://github.com/a-nau/pdf-link-checker/blob/main/LICENSE)
+- Uses [arasgungore-CV](https://github.com/arasgungore/arasgungore-CV): [MIT License](https://github.com/arasgungore/arasgungore-CV/blob/main/LICENSE) as example for the `.gif`
