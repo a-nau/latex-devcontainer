@@ -17,6 +17,6 @@
     "mounts": [
         "source=${env:USERPROFILE}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached" // Windows only to use Git credentials
     ],
-    "postCreateCommand": "sh .devcontainer/misc/copy_settings.sh;sh .devcontainer/ci/copy_ci.sh" // copy settings and CI
-    // "postCreateCommand": "sh .devcontainer/misc/copy_settings" // copy settings only
+    "postCreateCommand": "mkdir -p .vscode;cp -n .devcontainer/settings.json .vscode;mkdir -p .github/workflows;cp -n .devcontainer/ci/latex_build.yml .github/workflows;cp -n .devcontainer/ci/.gitlab-ci.yml ./", // copy settings and CI
+    // "postCreateCommand": "mkdir -p .vscode;cp -n .devcontainer/settings.json .vscode", // copy settings only
 }
