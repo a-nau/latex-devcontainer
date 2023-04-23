@@ -12,7 +12,6 @@ _Note_: You need VS Code and Docker installed to use this.
 ## Usage
 
 ![](misc/devcontainer.gif)
-_Note_: I already had the extension installed, and a reload is needed at the end to get access to the one-click tools from the Latex Build Option menu.
 
 Step by Step:
 
@@ -34,4 +33,4 @@ Step by Step:
 
 - Uses [arxiv-latex-cleaner](https://github.com/google-research/arxiv-latex-cleaner): [Apache 2.0 License](https://github.com/google-research/arxiv-latex-cleaner/blob/main/LICENSE)
 - Uses [pdf-link-checker](https://github.com/a-nau/pdf-link-checker): [MIT License](https://github.com/a-nau/pdf-link-checker/blob/main/LICENSE)
-- Uses [arasgungore-CV](https://github.com/arasgungore/arasgungore-CV): [MIT License](https://github.com/arasgungore/arasgungore-CV/blob/main/LICENSE) as example for the `.gif`
+- Uses [cvpr-latex-template](https://github.com/apoorvkh/cvpr-latex-template) as example for the `.gif`
