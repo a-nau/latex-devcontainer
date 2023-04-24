@@ -7,7 +7,7 @@ Devcontainer using LaTeX with VS Code featuring
 - one-click arXiv export
 - one-click PDF URL check
 
-_Note_: You need VS Code and Docker installed to use this.
+_Note_: No local LaTeX installation is needed, however, [VS Code](https://code.visualstudio.com/) and [Docker](https://docs.docker.com/get-docker/) need to be installed to use this.
 
 ## Usage
 
@@ -15,7 +15,7 @@ _Note_: You need VS Code and Docker installed to use this.
 
 Step by Step:
 
-- Install extension VS Code Devcontainer extension `ms-vscode-remote.remote-containers`
+- Install VS Code Devcontainer extension `ms-vscode-remote.remote-containers`
 - Clone repo or add submodule with path `.devcontainer` into your project
   ```shell
   git clone https://github.com/a-nau/latex-devcontainer.git .devcontainer
