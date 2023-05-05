@@ -10,7 +10,8 @@
                 "nickfode.latex-formatter",
                 "mathematic.vscode-latex",
                 "ms-azuretools.vscode-docker",
-                "meezilla.json"
+                "meezilla.json",
+                "valentjn.vscode-ltex"
             ]
         }
     },
