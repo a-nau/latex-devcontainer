@@ -6,7 +6,6 @@
         "vscode": {
             "extensions": [
                 "james-yu.latex-workshop",
-                "ban.spellright",
                 "nickfode.latex-formatter",
                 "mathematic.vscode-latex",
                 "ms-azuretools.vscode-docker",
