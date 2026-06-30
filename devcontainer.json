@@ -10,7 +10,8 @@
                 "mathematic.vscode-latex",
                 "ms-azuretools.vscode-docker",
                 "meezilla.json",
-                "valentjn.vscode-ltex"
+                "valentjn.vscode-ltex", 
+                "streetsidesoftware.code-spell-checker"
             ]
         }
     },
