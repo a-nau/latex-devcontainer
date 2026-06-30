@@ -18,8 +18,8 @@ Step by Step:
 - Install VS Code Devcontainer extension `ms-vscode-remote.remote-containers`
 - Clone repo or add submodule with path `.devcontainer` into your project
   ```shell
-  git clone https://github.com/a-nau/latex-devcontainer.git .devcontainer
-  git submodule add https://github.com/a-nau/latex-devcontainer.git .devcontainer
+  git clone git@github.com:adriandavidauer/latex-devcontainer.git .devcontainer
+  git submodule add git@github.com:adriandavidauer/latex-devcontainer.git .devcontainer
   ```
 - Press `F1` (or `CTRL + SHIFT + P`) and select `Dev Containers: Rebuild and Reopen Container`
 - (optional) rename main Texfile to `root.tex` or adjust CI configs if you want to use the CIs
