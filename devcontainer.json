@@ -1,6 +1,11 @@
 {
+    "name": "LatexDevcontainer",
+
     "build": {
-        "dockerfile": "Dockerfile"
+        "dockerfile": "Dockerfile",
+        "args": {
+         "USERNAME": "${localEnv:USER}"
+    }
     },
     "customizations": {
         "vscode": {
@@ -18,5 +23,18 @@
     "mounts": [
         // "source=${env:USERPROFILE}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached" // Windows only to use Git credentials
     ],
-    "postCreateCommand": "sed -i 's/\r$//' .devcontainer/misc/*.sh;sh .devcontainer/misc/initialize.sh"
+
+// Tells VS Code to match container UID/GID with host UID/GID
+    "updateRemoteUserUID": true,
+
+    // Connect as the host user
+    "remoteUser": "${localEnv:USER}",
+
+    "initializeCommand": "chmod 644 ~/.ssh/config 2>/dev/null || true",
+
+    // Runs once when the container is created
+    "postCreateCommand": "sudo chown -R $(id -u):$(id -g) ${containerWorkspaceFolder} && sed -i 's/\\r$//' .devcontainer/misc/*.sh && bash .devcontainer/misc/initialize.sh", 
+
+    // Runs every time the container starts up
+    "postStartCommand": "sudo chown -R $(id -u):$(id -g) ${containerWorkspaceFolder} && sudo chown -R root:root /etc/ssh/ssh_config.d/ && sudo chmod 755 /etc/ssh /etc/ssh/ssh_config.d && sudo chmod 644 /etc/ssh/ssh_config.d/* 2>/dev/null || true"
 }
