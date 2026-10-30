@@ -117,11 +117,9 @@
         },
         {
             "name": "prepare_arxiv",
-            "command": "sh",
-            "args": [
-                "%DIR%/.devcontainer/misc/prepare_arxiv.sh"
-            ],
+            "command": "prepare_arxiv",
+            "args": [],
             "env": {}
         },
     ]
-}
+}

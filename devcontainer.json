@@ -1,40 +1,20 @@
 {
     "name": "LatexDevcontainer",
 
+    // Builds the image locally (submodule usage). Extensions, lifecycle commands and
+    // updateRemoteUserUID come from the "devcontainer.metadata" label in the Dockerfile.
+    // Without submodule use the prebuilt image instead:
+    //   "image": "ghcr.io/adriandavidauer/latex-devcontainer:latest"
     "build": {
         "dockerfile": "Dockerfile",
         "args": {
          "USERNAME": "${localEnv:USER}"
     }
     },
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "james-yu.latex-workshop",
-                "nickfode.latex-formatter",
-                "mathematic.vscode-latex",
-                "ms-azuretools.vscode-docker",
-                "meezilla.json",
-                "valentjn.vscode-ltex", 
-                "streetsidesoftware.code-spell-checker"
-            ]
-        }
-    },
     "mounts": [
         // "source=${env:USERPROFILE}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached" // Windows only to use Git credentials
     ],
 
-// Tells VS Code to match container UID/GID with host UID/GID
-    "updateRemoteUserUID": true,
-
     // Connect as the host user
-    "remoteUser": "${localEnv:USER}",
-
-    "initializeCommand": "chmod 644 ~/.ssh/config 2>/dev/null || true",
-
-    // Runs once when the container is created
-    "postCreateCommand": "sudo chown -R $(id -u):$(id -g) ${containerWorkspaceFolder} && sed -i 's/\\r$//' .devcontainer/misc/*.sh && bash .devcontainer/misc/initialize.sh", 
-
-    // Runs every time the container starts up
-    "postStartCommand": "sudo chown -R $(id -u):$(id -g) ${containerWorkspaceFolder} && sudo chown -R root:root /etc/ssh/ssh_config.d/ && sudo chmod 755 /etc/ssh /etc/ssh/ssh_config.d && sudo chmod 644 /etc/ssh/ssh_config.d/* 2>/dev/null || true"
+    "remoteUser": "${localEnv:USER}"
 }
