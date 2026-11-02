@@ -1,4 +1,4 @@
-image: texlive/texlive:latest-full
+image: ghcr.io/adriandavidauer/latex-devcontainer:latest
 
 variables:
   FILE_NAME: "root"

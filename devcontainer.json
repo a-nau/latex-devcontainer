@@ -1,21 +1,20 @@
 {
+    "name": "LatexDevcontainer",
+
+    // Builds the image locally (submodule usage). Extensions, lifecycle commands and
+    // updateRemoteUserUID come from the "devcontainer.metadata" label in the Dockerfile.
+    // Without submodule use the prebuilt image instead:
+    //   "image": "ghcr.io/adriandavidauer/latex-devcontainer:latest"
     "build": {
-        "dockerfile": "Dockerfile"
-    },
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "james-yu.latex-workshop",
-                "nickfode.latex-formatter",
-                "mathematic.vscode-latex",
-                "ms-azuretools.vscode-docker",
-                "meezilla.json",
-                "valentjn.vscode-ltex"
-            ]
-        }
+        "dockerfile": "Dockerfile",
+        "args": {
+         "USERNAME": "${localEnv:USER}"
+    }
     },
     "mounts": [
         // "source=${env:USERPROFILE}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached" // Windows only to use Git credentials
     ],
-    "postCreateCommand": "sed -i 's/\r$//' .devcontainer/misc/*.sh;sh .devcontainer/misc/initialize.sh"
+
+    // Connect as the host user
+    "remoteUser": "${localEnv:USER}"
 }
