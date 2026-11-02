@@ -17,6 +17,7 @@ _Note_: No local LaTeX installation is needed, however, [VS Code](https://code.v
 ### Prebuilt image (recommended)
 
 No submodule and no local build needed, VS Code just pulls the image.
+Already using the submodule? See [Migrating from the submodule to the prebuilt image](#migrating-from-the-submodule-to-the-prebuilt-image).
 
 - Install VS Code Devcontainer extension `ms-vscode-remote.remote-containers`
 - Create `.devcontainer/devcontainer.json` in your project:
@@ -58,6 +59,68 @@ Step by Step:
 <p align="center">
     <img src="./misc/latex_command_menu.png" height="250"/>
 </p>
+
+## Migrating from the submodule to the prebuilt image
+
+Projects set up with the submodule build the image locally. To switch to the prebuilt image (no submodule, image is only downloaded), run the following in your project root. Commit or stash your changes first.
+
+1. **Remove the submodule**
+   ```shell
+   git submodule deinit -f .devcontainer
+   git rm -f .devcontainer
+   rm -rf .git/modules/.devcontainer    # PowerShell: Remove-Item -Recurse -Force .git\modules\.devcontainer
+   ```
+   If `.devcontainer` was your only submodule, `.gitmodules` is now empty. Remove it as well:
+   ```shell
+   git rm -f .gitmodules
+   ```
+2. **Add the new config** `.devcontainer/devcontainer.json`
+   ```json
+   {
+       "name": "LatexDevcontainer",
+       "image": "ghcr.io/adriandavidauer/latex-devcontainer:latest"
+   }
+   ```
+3. **Update the files copied from the submodule.** They are only copied once and are not overwritten, so update them by hand:
+   - `.vscode/settings.json` (required, otherwise the *prepare arxiv* recipe fails): in `latex-workshop.latex.tools` replace the `prepare_arxiv` tool
+     ```json
+     "command": "sh",
+     "args": [
+         "%DIR%/.devcontainer/misc/prepare_arxiv.sh"
+     ],
+     ```
+     with
+     ```json
+     "command": "prepare_arxiv",
+     "args": [],
+     ```
+   - `.github/workflows/latex_build.yml` and `.gitlab-ci.yml` (optional): the old versions keep working. To compile in CI with the same image as locally, replace them with the current [ci/latex_build.yml](ci/latex_build.yml) and [ci/.gitlab-ci.yml](ci/.gitlab-ci.yml) (keep your `root_file`/`FILE_NAME` if you changed it).
+
+   Alternatively delete these files before reopening the container, then the new versions are copied in. This discards your own changes to them.
+4. **Commit**
+   ```shell
+   git add -A
+   git commit -m "Use prebuilt LaTeX devcontainer image instead of submodule"
+   ```
+5. **(optional) Remove the old container and locally built images.** Close the VS Code window of the container first. The images are named `vsc-<project>-<hash>` and `vsc-<project>-<hash>-uid`, where `<project>` is the project folder name in lower case:
+   ```shell
+   docker rm -f $(docker ps -aq --filter "label=devcontainer.local_folder=$PWD")
+   docker images "vsc-<project>-*"
+   docker rmi $(docker images -q "vsc-<project>-*")
+   ```
+6. **Reopen the container**: press `F1` and select `Dev Containers: Rebuild and Reopen in Container`. The image is now downloaded instead of built.
+
+### Collaborators with an existing clone
+
+A plain `git pull` fails with `untracked working tree files would be overwritten by merge: .devcontainer/devcontainer.json`, because the old submodule folder stays on disk. Remove it **before** pulling:
+
+```shell
+git submodule deinit -f .devcontainer
+rm -rf .devcontainer .git/modules/.devcontainer    # PowerShell: Remove-Item -Recurse -Force .devcontainer, .git\modules\.devcontainer
+git pull
+```
+
+Then continue with steps 5 and 6. Fresh clones need no extra steps.
 
 ## Troubleshooting
 
